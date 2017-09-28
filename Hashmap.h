@@ -16,9 +16,9 @@ public:
 
 private:
 	int getIndex(std::string key);
-	int size_;
-	int item_count;
-	T* map_;
+	int size_;	// Size of the map
+	int item_count;	// Number of items currently in the map
+	T* map_;	// Pointer to the array table
 };
 
 template<typename T>
@@ -75,6 +75,12 @@ float Hashmap<T>::load()
 	return ((float)item_count) / size_;
 }
 
+/**
+ *	Takes in the key as a string and hashes it
+ *	Then returns its appropriate index in the map
+ *	@param key a string key for a pair to be mapped
+ *	@return index of the map for the pair
+ */
 template<typename T>
 int Hashmap<T>::getIndex(std::string key)
 {
