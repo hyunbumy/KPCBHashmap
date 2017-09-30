@@ -33,6 +33,13 @@ Hashmap<T>::~Hashmap()
 	delete[] map_;
 }
 
+/**
+*	Takes in the key as a string and the value to be stored in the map
+*	Then returns true if successful, false if otherwise
+*	@param key a string key for a pair to be mapped
+*	@param value an object to be associated with the key
+*	@return true if successful, false if there is a collision
+*/
 template<typename T>
 bool Hashmap<T>::set(std::string key, T value)
 {
@@ -47,6 +54,12 @@ bool Hashmap<T>::set(std::string key, T value)
 	return false;
 }
 
+/**
+*	Takes in the key as a string and
+*	returns the value associated with the key
+*	@param key a string key for a pair in the hashmap
+*	@return value with the given key or null if nonexistent
+*/
 template<typename T>
 T Hashmap<T>::getValue(std::string key)
 {
@@ -55,20 +68,29 @@ T Hashmap<T>::getValue(std::string key)
 	return map_[getIndex(key)];
 }
 
+/**
+*	Takes in the key as a string and deletes the corresponding entry
+*	@param key a string key for a pair in the hashmap
+*	@return element with the given key or null if nonexistent
+*/
 template<typename T>
 T Hashmap<T>::deleteValue(std::string key)
 {
 	auto curr = map_[getIndex(key)];
 	if (curr)
 	{
-		auto val = curr;
-		curr = nullptr;
+		map_[getIndex(key)] = nullptr;
 		item_count--;
-		return val;
+		return curr;
 	}
 	return nullptr;
 }
 
+/**
+*	Returns the load factor of the hashmap given the current elements
+*	stored in the map
+*	@return load factor of the map with values currently stored
+*/
 template<typename T>
 float Hashmap<T>::load()
 {
